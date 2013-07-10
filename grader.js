@@ -7,7 +7,7 @@ development and basic DOM parsing.
 
 */
 
-var fs require('fs');
+var fs = require('fs');
 var program = require('commander');
 var cheerio = require('cheerio');
 var HTMLFILE_DEFAULT = "index.html";
@@ -22,7 +22,7 @@ var assertFileExists = function(infile) {
 };
 
 var cheerioHtmlFile = function(htmlfile) {
-	return cheerio.load(fs.readFileSyn(htmlfile);
+	return cheerio.load(fs.readFileSync(htmlfile));
 };
 
 var loadChecks = function(checksfile) {
@@ -34,8 +34,8 @@ var checkHtmlFile = function(htmlfile, checksfile) {
 	var checks = loadChecks(checksfile).sort();
 	var out = {};
 	for(var ii in checks) {
-		var present = $(checks[ii[).length >0;
-		out[checks[i]] = present;
+		var present = $(checks[ii]).length >0;
+		out[checks[ii]] = present;
 	}
 	return out;
 };
@@ -46,7 +46,7 @@ var clone = function(fn) {
 
 if(require.main == module) {
 	program
-	.option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists, CHECKSFILE_DEFAULT)
+	.option('-c, --checks <check_file>', 'Path to checks.json', clone(assertFileExists), CHECKSFILE_DEFAULT)
 	.option('-f, --file <html_file>', 'Path to index.html', clone(assertFileExists), HTMLFILE_DEFAULT)
 	.parse(process.argv);
 	var checkJson = checkHtmlFile(program.file, program.checks);
